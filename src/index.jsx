@@ -1,6 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './component/app.jsx';
+
+
 import 'bootstrap';
+
+import 'github-fork-ribbon-css/gh-fork-ribbon.css';
 import './main.scss';
 
 import debug from 'debug';
@@ -15,14 +20,7 @@ debug.enable('_cap:*');
 const dbg = debug('_cap:main');
 dbg('appConf: %j', appConf);
 
-const App = () => {
-  return (
-    <p>test</p>
-  );
-};
-
 ReactDOM.render(
   <App />,
   document.getElementById('root')
 );
-

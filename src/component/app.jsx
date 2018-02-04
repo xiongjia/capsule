@@ -1,4 +1,6 @@
 import React from 'react';
+import Header from './header.jsx';
+import Main from './main.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -7,8 +9,14 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className='component-app'>
-        <p>app</p>
+      <div>
+        <section className='container'>
+          <Header />
+        </section>
+        <hr />
+        <section className='container'>
+          <Main />
+        </section>
       </div>
     );
   }

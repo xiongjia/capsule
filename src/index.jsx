@@ -4,8 +4,6 @@ import App from './component/app.jsx';
 
 
 import 'bootstrap';
-
-import 'github-fork-ribbon-css/gh-fork-ribbon.css';
 import './main.scss';
 
 import debug from 'debug';

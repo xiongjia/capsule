@@ -19,6 +19,8 @@ const dbg = debug('_cap:main');
 dbg('appConf: %j', appConf);
 
 ReactDOM.render(
-  <App />,
+  <App 
+    conf={appConf}
+  />,
   document.getElementById('root')
 );

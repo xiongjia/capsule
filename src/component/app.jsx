@@ -1,10 +1,28 @@
 import React from 'react';
-import Header from './header.jsx';
-import Main from './main.jsx';
+
+import debug from 'debug';
+const dbg = debug('_cap:app');
+
+const Header = () => {
+  return (
+    <div className='page-header'>
+      <h1>Ingress bookmarks</h1>
+      <p className='text-success'>My Ingress bookmarks</p>
+    </div>
+  );
+};
+
+const Main = () => {
+  return (
+    <p> main test </p>
+  );
+};
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+    
+    dbg('props %j', props);
   }
 
   render() {
@@ -13,6 +31,7 @@ class App extends React.Component {
         <section className='container'>
           <Header />
         </section>
+
         <hr />
         <section className='container'>
           <Main />

@@ -3,6 +3,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 
 const precss = require('precss');
@@ -22,8 +23,10 @@ const conf = {
 
 const dirs = {
   DIST: path.join(__dirname, 'dist'),
+  DIST_ASSETS: path.join(__dirname, './dist/assets'),
   SRC_ENTRY_JS: path.join(__dirname, './src/index.jsx'),
-  SRC_ENTRY_PAGE: path.join(__dirname, './src/index-template.html')
+  SRC_ENTRY_PAGE: path.join(__dirname, './src/index-template.html'),
+  SRC_ASSETS: path.join(__dirname, './src/assets')
 };
 
 exports = module.exports = {
@@ -86,7 +89,10 @@ exports = module.exports = {
       APP_BUILD_TS: JSON.stringify(conf.buildTS),
       APP_BUILD_OS: JSON.stringify(conf.buildOS)
     }),
-    new ExtractTextPlugin('./src/main.css')
+    new ExtractTextPlugin('./src/main.css'),
+    new CopyWebpackPlugin([
+      { from: dirs.SRC_ASSETS, to: dirs.DIST_ASSETS }
+    ])
   ],
   devServer: {
     contentBase: dirs.DIST,

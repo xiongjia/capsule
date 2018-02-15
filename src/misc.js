@@ -1,6 +1,8 @@
 'use strict';
 
 import debug from 'debug';
+import each from 'lodash/each';
+import values from 'lodash/values';
 
 const dbgLogPrefix = '_cap';
 
@@ -18,7 +20,7 @@ const initDbgLog = (opts) => {
   }
 };
 
-export default class Misc {
+export class Context {
   constructor() {
     initDbgLog({ debug: true });
     this.dbg = this.mkDbgLog('misc');
@@ -29,3 +31,24 @@ export default class Misc {
     return  debug(`${dbgLogPrefix}:${prefix}`);
   }
 };
+
+export class Items {
+  constructor(opts) {
+    this.srcSet = {};
+    this.add(opts);
+  }
+
+  add(opts = {}) {
+    each(opts.srcSet || [], (item) => {
+      const { src } = item;
+      this.srcSet[src] = {
+        src: src,
+        thumbnail: item.thumbnail || src,
+        size: { width: 480, height: 480 },
+        sizeThumbnail: { width: 220, height: 220 }
+      };
+    });
+  }
+
+  items = () => values(this.srcSet);
+}

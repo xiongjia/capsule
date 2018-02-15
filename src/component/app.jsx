@@ -1,5 +1,6 @@
 import React from 'react';
 import Lightbox from './lightbox.jsx';
+import { Items } from '../misc.js';
 
 const Header = () => {
   return (
@@ -13,6 +14,14 @@ const Header = () => {
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+
+    this.srcItems = new Items();
+    this.srcItems.add({
+      srcSet: [
+        { src: '/assets/img/portal_000000.jpg' },
+        { src: '/assets/img/portal_000001.jpg' }
+      ]
+    });
   }
 
   render() {
@@ -24,7 +33,10 @@ export default class App extends React.Component {
 
         <hr />
         <section className='container'>
-          <Lightbox misc={this.props.misc} />
+          <Lightbox
+            context={this.props.context}
+            srcItems={this.srcItems.items()}
+          />
         </section>
       </div>
     );

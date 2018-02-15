@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './component/app.jsx';
-import Misc from './misc.js';
+import { Context } from './misc.js';
 
 import 'bootstrap';
 import './main.scss';
 
-const misc = new Misc();
+const context = new Context();
 
 ReactDOM.render(
   <App
-    misc={misc}
+    context={context}
   />,
   document.getElementById('root')
 );

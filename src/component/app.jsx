@@ -24,7 +24,7 @@ export default class App extends React.Component {
 
         <hr />
         <section className='container'>
-          <Lightbox />
+          <Lightbox misc={this.props.misc} />
         </section>
       </div>
     );

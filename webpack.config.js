@@ -35,7 +35,7 @@ exports = module.exports = {
   entry: [ dirs.SRC_ENTRY_JS ],
   output: {
     path: dirs.DIST,
-    filename: conf.debug ? 'bundle.js' : 'bundle.[hash:6].min.js'
+    filename: conf.debug ? 'js/bundle.js' : 'js/bundle.[hash:6].min.js'
   },
   module: {
     rules: [{
@@ -94,7 +94,8 @@ exports = module.exports = {
       APP_BUILD_OS: JSON.stringify(conf.buildOS),
       APP_SITE_ROOT: JSON.stringify(conf.siteRoot)
     }));
-    plugins.push(new ExtractTextPlugin('./src/main.css'));
+    plugins.push(new ExtractTextPlugin(
+      conf.debug ? 'css/bundle.css' : 'css/bundle.[hash:6].css'));
     plugins.push(new CopyWebpackPlugin([
       { from: dirs.SRC_ASSETS, to: dirs.DIST_ASSETS }
     ]));

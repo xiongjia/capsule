@@ -39,6 +39,12 @@ exports = module.exports = {
   },
   module: {
     rules: [{
+      test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      use: 'url-loader?limit=10000&name=fonts/[name][hash:6].[ext]',
+    }, {
+      test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
+      use: 'file-loader?name=fonts/[name][hash:6].[ext]',
+    },{
       test: /\.css$/,
       use: [ 'style-loader', 'css-loader' ],
       include: [ /node_modules/ ]

@@ -12,6 +12,23 @@ const Header = () => {
   );
 };
 
+const SearchBar = () => {
+  return (
+    <div>
+      <div className='input-group input-group-sm'>
+        <div className='input-group-text'>
+          <i className='fa fa-search'></i>
+        </div>
+        <input
+          type='text'
+          className='form-control'
+          placeholder='Search ...'
+        />
+      </div>
+    </div>
+  );
+}
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -32,6 +49,8 @@ export default class App extends React.Component {
 
         <hr />
         <section className='container'>
+          <SearchBar />
+          <br />
           <Lightbox
             context={this.props.context}
             srcItems={this.srcItems.items()}

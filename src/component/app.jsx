@@ -1,6 +1,7 @@
 import React from 'react';
 import Lightbox from './lightbox.jsx';
 import { Items } from '../misc.js';
+import content from '../content.json';
 
 const Header = () => {
   return (
@@ -15,13 +16,11 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.srcItems = new Items();
-    this.srcItems.add({
-      srcSet: [
-        { src: '/assets/img/portal_000000.jpg' },
-        { src: '/assets/img/portal_000001.jpg' }
-      ]
-    });
+    const { context } = props;
+    this.dbg = context.mkDbgLog('app');
+    this.dbg('content %j', content);
+    this.srcItems = new Items({ context });
+    this.srcItems.loadFromJson(content);
   }
 
   render() {

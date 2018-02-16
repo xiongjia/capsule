@@ -16,6 +16,7 @@ const platform = require('os').platform();
 const conf = {
   debug: process.env.NODE_ENV !== 'production',
   devSrvPort: 3500,
+  siteRoot: process.env.APP_SITE_ROOT || '/',
   buildTS: buildTM.valueOf(),
   buildTM: buildTM.toISOString(),
   buildOS: platform
@@ -87,7 +88,8 @@ exports = module.exports = {
     new webpack.DefinePlugin({
       APP_DEBUG: JSON.stringify(conf.debug),
       APP_BUILD_TS: JSON.stringify(conf.buildTS),
-      APP_BUILD_OS: JSON.stringify(conf.buildOS)
+      APP_BUILD_OS: JSON.stringify(conf.buildOS),
+      APP_SITE_ROOT: JSON.stringify(conf.siteRoot)
     }),
     new ExtractTextPlugin('./src/main.css'),
     new CopyWebpackPlugin([

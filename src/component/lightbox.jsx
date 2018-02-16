@@ -1,9 +1,10 @@
 import React from 'react';
 
+const KEYCODE_ESC = 27;
+
 export default class Lightbox extends React.Component {
   constructor(props) {
     super(props);
-    this.idx = 0;
     const { context } = this.props;
     this.dbg = context.mkDbgLog('ltbx');
     this.handleImgClick = this.handleImgClick.bind(this);
@@ -11,13 +12,13 @@ export default class Lightbox extends React.Component {
     this.handleKeydown = this.handleKeydown.bind(this);
   }
 
-  handleModalCloseClick = () => this.closeModal();
-  handleImgClick = (item) => this.openModal(item);
+  handleModalCloseClick() { this.closeModal(); }
+  handleImgClick(item) { this.openModal(item); }
 
   openModal(item = {}) {
     this.dbg('open item: %s', item.src);
     const contentEl = document.getElementById('capModalContent');
-    contentEl.src = item.src;
+    contentEl.src = item.src;    
     contentEl.width = item.size.width;
     contentEl.height =  item.size.height;
     const modalEl = document.getElementById('capModal');
@@ -30,7 +31,7 @@ export default class Lightbox extends React.Component {
   }
 
   handleKeydown(evt) {
-    if (evt.keyCode === 27) {
+    if (evt.keyCode === KEYCODE_ESC) {
       this.closeModal();
     }
   }
@@ -62,9 +63,7 @@ export default class Lightbox extends React.Component {
           <div className='container'>
             <span
               className='close cursor'
-              onClick={this.handleModalCloseClick}
-            >&times;</span>
-
+              onClick={this.handleModalCloseClick}>&times;</span>  
             <img id='capModalContent' />
           </div>
         </div>

@@ -64,19 +64,22 @@ exports = module.exports = {
       })
     }]
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.ProvidePlugin({
+  plugins: (() => {
+    const plugins = [];
+    if (conf.debug) {
+      plugins.push(new webpack.HotModuleReplacementPlugin());
+    }
+    plugins.push(new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
       Popper: [ 'popper.js', 'default' ]
-    }),
-    new CleanWebpackPlugin([ dirs.DIST ], {
+    }));
+    plugins.push(new CleanWebpackPlugin([ dirs.DIST ], {
       verbose: true,
       dry: false
-    }),
-    new HtmlWebpackPlugin({
+    }));
+    plugins.push(new HtmlWebpackPlugin({
       inject: true,
       template: dirs.SRC_ENTRY_PAGE,
       minify: conf.debug ? {} : {
@@ -84,18 +87,19 @@ exports = module.exports = {
         removeComments: true,
         removeRedundantAttributes: true
       }
-    }),
-    new webpack.DefinePlugin({
+    }));
+    plugins.push(new webpack.DefinePlugin({
       APP_DEBUG: JSON.stringify(conf.debug),
       APP_BUILD_TS: JSON.stringify(conf.buildTS),
       APP_BUILD_OS: JSON.stringify(conf.buildOS),
       APP_SITE_ROOT: JSON.stringify(conf.siteRoot)
-    }),
-    new ExtractTextPlugin('./src/main.css'),
-    new CopyWebpackPlugin([
+    }));
+    plugins.push(new ExtractTextPlugin('./src/main.css'));
+    plugins.push(new CopyWebpackPlugin([
       { from: dirs.SRC_ASSETS, to: dirs.DIST_ASSETS }
-    ])
-  ],
+    ]));
+    return plugins;
+  })(),
   devServer: {
     contentBase: dirs.DIST,
     compress: true,

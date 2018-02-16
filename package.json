@@ -9,7 +9,7 @@
     "url": "git+https://github.com/xiongjia/capsule.git"
   },
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "cross-env NODE_ENV=debug webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack",
     "buildDebug": "cross-env NODE_ENV=debug webpack"
   },

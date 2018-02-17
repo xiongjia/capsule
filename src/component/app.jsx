@@ -17,7 +17,7 @@ const SearchBar = () => {
     <div>
       <div className='input-group input-group-sm'>
         <div className='input-group-text'>
-          <i className='fa fa-search'></i>
+          <i className='fa fa-search' />
         </div>
         <input
           type='text'
@@ -27,7 +27,7 @@ const SearchBar = () => {
       </div>
     </div>
   );
-}
+};
 
 export default class App extends React.Component {
   constructor(props) {

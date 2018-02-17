@@ -1,8 +1,13 @@
 [
   {
-    "src": "assets/img/portal_000000.jpg"
-  },
-  {
-    "src": "assets/img/portal_000001.jpg"
+    "src": "assets/img/portal_000000.jpg",
+    "tags": [ "portal", "Shanghai" ],
+    "date": "2018-02-04",
+    "caption": "阳光谷"
+  }, {
+    "src": "assets/img/portal_000001.jpg",
+    "tags": [ "portal", "Shanghai" ],
+    "date": "2018-02-04",
+    "caption": "世博源三楼湖面雕塑"
   }
 ]

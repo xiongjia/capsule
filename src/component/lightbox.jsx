@@ -76,7 +76,7 @@ export default class Lightbox extends React.Component {
           <div className='container'>
             <span
               className='close cursor' onClick={this.handleModalCloseClick}>
-              <i class='fa fa-times' />
+              <i className='fa fa-times' />
             </span>  
             <img id='capModalContent' />
             <div id='capModalDesc' />

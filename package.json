@@ -10,7 +10,8 @@
   },
   "scripts": {
     "start": "cross-env NODE_ENV=debug webpack-dev-server",
-    "build": "cross-env NODE_ENV=production webpack",
+    "build": "cross-env NODE_ENV=production webpack -p",
+    "buildAnalyzer": "cross-env BUILD_ANALYZER=true npm run build",
     "buildDebug": "cross-env NODE_ENV=debug webpack"
   },
   "devDependencies": {
@@ -34,8 +35,10 @@
     "precss": "^3.1.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.20.1",
+    "uglifyjs-webpack-plugin": "^1.2.0",
     "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
+    "webpack-bundle-analyzer": "^2.10.0",
     "webpack-dev-server": "^2.11.1"
   },
   "dependencies": {
@@ -46,6 +49,8 @@
     "lodash": "^4.17.5",
     "moment": "^2.20.1",
     "popper.js": "^1.12.9",
+    "preact": "^8.2.7",
+    "preact-compat": "^3.18.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   }

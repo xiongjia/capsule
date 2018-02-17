@@ -1,10 +1,14 @@
 'use strict';
 
+const webpack = require('webpack');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
 
 const precss = require('precss');
 const autoprefixer = require('autoprefixer');
@@ -15,6 +19,7 @@ const platform = require('os').platform();
 
 const conf = {
   debug: process.env.NODE_ENV !== 'production',
+  analyzerReporter: !!process.env.BUILD_ANALYZER,
   devSrvPort: 3500,
   siteRoot: process.env.APP_SITE_ROOT || '/',
   buildTS: buildTM.valueOf(),
@@ -43,18 +48,14 @@ exports = module.exports = {
       use: 'url-loader?limit=10000&name=fonts/[name][hash:6].[ext]',
     }, {
       test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
-      use: 'file-loader?name=fonts/[name][hash:6].[ext]',
-    },{
-      test: /\.css$/,
-      use: [ 'style-loader', 'css-loader' ],
-      include: [ /node_modules/ ]
+      use: 'file-loader?name=fonts/[name][hash:6].[ext]',     
     }, {
       test: /\.jsx?$/,
       exclude: /node_modules/,
       loader: 'babel-loader',
       query: { cacheDirectory: true }
     }, {
-      test: /\.(scss)$/,
+      test: /\.(scss|css)$/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: [{
@@ -69,6 +70,17 @@ exports = module.exports = {
         }]
       })
     }]
+  },
+  resolve: {
+    alias: (() => {
+      if (conf.debug) {
+        return {};
+      }
+      return {
+        'react': 'preact-compat',
+        'react-dom': 'preact-compat',
+      };
+    })()
   },
   plugins: (() => {
     const plugins = [];
@@ -105,6 +117,25 @@ exports = module.exports = {
     plugins.push(new CopyWebpackPlugin([
       { from: dirs.SRC_ASSETS, to: dirs.DIST_ASSETS }
     ]));
+    if (!conf.debug) {
+      plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/));
+      plugins.push(new UglifyJsPlugin({
+        parallel: 8,
+        sourceMap: false,
+        uglifyOptions: {
+          output: {
+            comments: false,
+            beautify: false
+          }
+        }
+      }));
+    }
+    if (conf.analyzerReporter) {
+      plugins.push(new BundleAnalyzerPlugin({
+        openAnalyzer: false,
+        analyzerMode: 'server'
+      }));
+    }
     return plugins;
   })(),
   devServer: {

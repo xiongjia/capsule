@@ -18,10 +18,23 @@ export default class Lightbox extends React.Component {
   openModal(item = {}) {
     this.dbg('open item: %s', item.src);
     const contentEl = document.getElementById('capModalContent');
+    const modalEl = document.getElementById('capModal');
+    const descEl = document.getElementById('capModalDesc');
+    
     contentEl.src = item.src;    
     contentEl.width = item.size.width;
     contentEl.height =  item.size.height;
-    const modalEl = document.getElementById('capModal');
+
+    this.dbg('caption: %s', item.caption);    
+    const desc = (() => {
+      if (!item.date) {
+        return item.caption;
+      }
+      return `
+        ${item.caption} <br />
+        ${item.date.format('LL')} (${item.date.fromNow()})`;
+    })();
+    descEl.innerHTML = `<p>${desc}</p>`;
     modalEl.style.display = 'block';
   }
 
@@ -62,9 +75,11 @@ export default class Lightbox extends React.Component {
         <div className='capLightboxModal' id='capModal'>
           <div className='container'>
             <span
-              className='close cursor'
-              onClick={this.handleModalCloseClick}>&times;</span>  
+              className='close cursor' onClick={this.handleModalCloseClick}>
+              <i class='fa fa-times' />
+            </span>  
             <img id='capModalContent' />
+            <div id='capModalDesc' />
           </div>
         </div>
       </div>

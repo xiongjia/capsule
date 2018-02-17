@@ -52,3 +52,27 @@
   display: block;
   max-width: 700px;
 }
+
+.capModalPrev, .capModalNext {
+  cursor: pointer;
+  position: absolute;
+  top: 35%;
+  width: auto;
+  padding: 20px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 35px;
+  transition: 0.3s;
+          user-select: none;
+  -webkit-user-select: none;
+}
+
+.capModalPrev:hover, .capModalNext:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}  
+
+.capModalNext {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}

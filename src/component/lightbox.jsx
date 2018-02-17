@@ -112,14 +112,17 @@ export default class Lightbox extends React.Component {
               &times;
             </span>
 
-            <a 
-              className='capModalPrev'
-              onClick={() => this.plusSlides(-1)}>&#10094;</a>
-            <a 
-              className='capModalNext'
-              onClick={() => this.plusSlides(1)}>&#10095;</a>
-
-            <img id='capModalContent' />
+            <div className='row'>
+              <div className='col-1 offset-1'>
+                <a className='capModalPrev'
+                  onClick={() => this.plusSlides(-1)}>&#10094;</a>
+              </div>
+              <div className='col-8'><img id='capModalContent' /></div>
+              <div className='col-1'>
+                <a className='capModalNext'
+                  onClick={() => this.plusSlides(1)}>&#10095;</a>
+              </div>
+            </div>
             <div id='capModalDesc' />
           </div>
         </div>

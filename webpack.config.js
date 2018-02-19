@@ -32,7 +32,10 @@ const dirs = {
   DIST_ASSETS: path.join(__dirname, './dist/assets'),
   SRC_ENTRY_JS: path.join(__dirname, './src/index.jsx'),
   SRC_ENTRY_PAGE: path.join(__dirname, './src/index-template.html'),
-  SRC_ASSETS: path.join(__dirname, './src/assets')
+  SRC_ASSETS: (() => {
+    const oneDrvRoot = process.env['_onedrv_root'];
+    return path.join(oneDrvRoot, './projects/capsule/assets');
+  })()
 };
 
 exports = module.exports = {

@@ -12,7 +12,7 @@
     "start": "cross-env NODE_ENV=debug webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack -p",
     "buildAnalyzer": "cross-env BUILD_ANALYZER=true npm run build",
-    "buildDebug": "cross-env NODE_ENV=debug webpack"
+    "buildDebug": "cross-env NODE_ENV=debug webpack -d"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.5",

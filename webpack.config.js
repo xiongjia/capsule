@@ -47,11 +47,15 @@ exports = module.exports = {
   },
   module: {
     rules: [{
-      test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-      use: 'url-loader?limit=10000&name=fonts/[name].[ext]',
-    }, {
-      test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
-      use: 'file-loader?name=fonts/[name].[ext]',     
+      test: /.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+      use: [{
+        loader: 'file-loader',
+        options: {
+          name: '[name][hash:6].[ext]',
+          outputPath: 'fonts/',
+          publicPath: '../'
+        }
+      }]
     }, {
       test: /\.jsx?$/,
       exclude: /node_modules/,

@@ -1,5 +1,7 @@
 
 .capLightbox {
+  padding-left: 18px;
+
   .capLightboxItem {
     cursor: pointer;
     border: 2px solid #ddd;
@@ -28,8 +30,9 @@
 
     .close {
       color: white;
-      top: 5px;
-      right: 250px;
+      position: absolute;
+      top: 15px;
+      right: 30px;
       font-size: 35px;
       font-weight: bold;
     }
@@ -50,15 +53,15 @@
 #capModalContent {
   margin: auto;
   display: block;
-  max-width: 700px;
+  max-width: 750px;
+  width: 100%;
 }
 
 .capModalPrev, .capModalNext {
   cursor: pointer;
   position: sticky;
-  top: 25%;
+  top: 15%;
   width: auto;
-  padding: 20px;  
   margin-top: -50px;
   color: white;
   font-weight: bold;

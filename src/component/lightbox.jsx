@@ -1,8 +1,12 @@
 import React from 'react';
 
-const KEYCODE_ESC = 27;
-const KEYCODE_LEFT = 37;
-const KEYCODE_RIGHT = 39;
+const KEYCODE_ESC      = 27;
+const KEYCODE_LEFT     = 37;
+const KEYCODE_UP       = 38;
+const KEYCODE_RIGHT    = 39;
+const KEYCODE_DOWN     = 40;
+const KEYCODE_PG_UP    = 33;
+const KEYCODE_PG_DOWN  = 34;
 
 export default class Lightbox extends React.Component {
   constructor(props) {
@@ -26,8 +30,6 @@ export default class Lightbox extends React.Component {
     const descEl = document.getElementById('capModalDesc');
 
     contentEl.src = item.src;
-    contentEl.width = item.size.width;
-    contentEl.height =  item.size.height;
     const desc = (() => {
       if (!item.date) {
         return item.caption;
@@ -73,11 +75,16 @@ export default class Lightbox extends React.Component {
   }
 
   handleKeydown(evt) {
-    if (evt.keyCode === KEYCODE_ESC) {
+    const { keyCode } = evt;
+    if (keyCode === KEYCODE_ESC) {
       this.closeModal();
-    } else if (evt.keyCode === KEYCODE_LEFT) {
+    } else if (keyCode === KEYCODE_LEFT || 
+               keyCode === KEYCODE_UP ||
+               keyCode === KEYCODE_PG_UP) {
       this.plusSlides(-1);
-    } else if (evt.keyCode === KEYCODE_RIGHT) {
+    } else if (keyCode === KEYCODE_RIGHT ||
+               keyCode === KEYCODE_DOWN ||
+               keyCode === KEYCODE_PG_DOWN) {
       this.plusSlides(1);
     }
   }
@@ -113,11 +120,13 @@ export default class Lightbox extends React.Component {
             </span>
 
             <div className='row'>
-              <div className='col-1 offset-1'>
+              <div className='col-1'>
                 <a className='capModalPrev'
                   onClick={() => this.plusSlides(-1)}>&#10094;</a>
               </div>
-              <div className='col-8'><img id='capModalContent' /></div>
+              <div className='col-9'>
+                <img id='capModalContent' />
+              </div>
               <div className='col-1'>
                 <a className='capModalNext'
                   onClick={() => this.plusSlides(1)}>&#10095;</a>

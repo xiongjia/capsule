@@ -22,7 +22,7 @@ const SearchBar = () => {
         <input
           type='text'
           className='form-control'
-          placeholder='Search ... (to be implement)'
+          placeholder='Search ... (To Be Implemented)'
         />
       </div>
     </div>

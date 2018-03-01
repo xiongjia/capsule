@@ -121,9 +121,11 @@ exports = module.exports = {
     }));
     plugins.push(new ExtractTextPlugin(
       conf.debug ? 'css/bundle.css' : 'css/bundle.[hash:6].css'));
-    plugins.push(new CopyWebpackPlugin([
-      { from: dirs.SRC_ASSETS, to: dirs.DIST_ASSETS }
-    ]));
+    plugins.push(new CopyWebpackPlugin([{
+      from: dirs.SRC_ASSETS,
+      to: dirs.DIST_ASSETS,
+      ignore: [ '*.js', 'portal*.json' ]
+    }]));
     if (!conf.debug) {
       plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/));
       plugins.push(new UglifyJsPlugin({

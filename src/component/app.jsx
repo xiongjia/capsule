@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import Lightbox from './lightbox.jsx';
 import { Items } from '../misc.js';
 import content from '../content.json';
@@ -29,7 +32,7 @@ const SearchBar = () => {
   );
 };
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
 
@@ -41,10 +44,17 @@ export default class App extends React.Component {
   }
 
   render() {
+    const { value, onIncClick, onDecClick } = this.props;
+
     return (
       <div>
         <section className='container'>
           <Header />
+          <br />
+          <button onClick={onIncClick}>inc</button>
+          <button onClick={onDecClick}>dec</button>
+          <br />
+          <span>{value}</span>
         </section>
 
         <hr />
@@ -60,3 +70,21 @@ export default class App extends React.Component {
     );
   }
 }
+
+App.propTypes = {
+  value: PropTypes.number.isRequired,
+  onIncClick: PropTypes.func.isRequired,
+  onDecClick: PropTypes.func.isRequired
+};
+
+export default connect(
+  (state) => {
+    return { value: state.count }; 
+  },
+  (dispatch) => {
+    return {
+      onIncClick: () => dispatch({ type: 'INCREMENT' }),
+      onDecClick: () => dispatch({ type: 'DECREMENT' })
+    };
+  }
+)(App);

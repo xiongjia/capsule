@@ -2,9 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import Lightbox from './lightbox.jsx';
-import { Items } from '../misc.js';
+import Lightbox from '../component/lightbox.jsx';
+import { Items, appContext } from '../misc';
 import content from '../content.json';
+
+const dbg = appContext.mkDbgLog('app');
 
 const Header = () => {
   return (
@@ -36,25 +38,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    const { context } = props;
-    this.dbg = context.mkDbgLog('app');
-    this.dbg('content %j', content);
-    this.srcItems = new Items({ context });
+    dbg('content %j', content);
+    this.srcItems = new Items();
     this.srcItems.loadFromJson(content);
   }
 
   render() {
-    const { value, onIncClick, onDecClick } = this.props;
-
     return (
       <div>
         <section className='container'>
           <Header />
-          <br />
-          <button onClick={onIncClick}>inc</button>
-          <button onClick={onDecClick}>dec</button>
-          <br />
-          <span>{value}</span>
         </section>
 
         <hr />

@@ -4,18 +4,16 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 import reducers from './reducers';
-import App from './component/app.jsx';
-import { Context } from './misc.js';
+import App from './container/app.jsx';
 
 import 'bootstrap';
 import './main.scss';
 
 const store = createStore(reducers);
-const context = new Context();
 
 ReactDOM.render(
   <Provider store={store}>  
-    <App context={context} />
+    <App />
   </Provider>,
   document.getElementById('root')
 );

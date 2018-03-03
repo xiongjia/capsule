@@ -1,4 +1,7 @@
 import React from 'react';
+import { appContext } from '../misc';
+
+const dbg = appContext.mkDbgLog('ltbx');
 
 const KEYCODE_ESC      = 27;
 const KEYCODE_LEFT     = 37;
@@ -11,8 +14,6 @@ const KEYCODE_PG_DOWN  = 34;
 export default class Lightbox extends React.Component {
   constructor(props) {
     super(props);
-    const { context } = this.props;
-    this.dbg = context.mkDbgLog('ltbx');
     this.handleImgClick = this.handleImgClick.bind(this);
     this.handleModalCloseClick = this.handleModalCloseClick.bind(this);
     this.handleKeydown = this.handleKeydown.bind(this);
@@ -42,7 +43,7 @@ export default class Lightbox extends React.Component {
   }
 
   openModal(item = {}, idx) {
-    this.dbg('open item: %s (%d)', item.src, idx);
+    dbg('open item: %s (%d)', item.src, idx);
 
     this.currentIdx = idx;
     this.modalOpened = true;
@@ -58,7 +59,7 @@ export default class Lightbox extends React.Component {
   }
 
   plusSlides(cnt) {
-    this.dbg('plus slides: %d', cnt);
+    dbg('plus slides: %d', cnt);
     if (!this.modalOpened) {
       return;
     }

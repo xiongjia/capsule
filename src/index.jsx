@@ -5,7 +5,7 @@ import Root from './containers/root.jsx';
 import { configureStore } from './store';
 
 import 'bootstrap';
-import './main.scss';
+import './style/main.scss';
 
 const store = configureStore();
 

@@ -14,9 +14,7 @@
       "jsx": true
     }
   },
-  "plugins": [
-    "react"
-  ],
+  "plugins": [ "react", "babel" ],
   "globals": {
     "APP_BUILD_TS": true,
     "APP_BUILD_OS": true,
@@ -28,6 +26,7 @@
     "semi": [ "error", "always" ],
     "no-console": 0,
     "no-unused-vars": ["error", { "args": "none" }],
+    "babel/no-invalid-this": 1,
     "jsx-quotes": ["error", "prefer-single"],
     "react/jsx-boolean-value": "error",
     "react/jsx-curly-spacing": ["error", "never"],

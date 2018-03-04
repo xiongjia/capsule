@@ -1,63 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { appContext } from '../misc';
 import PropTypes from 'prop-types';
 
-import Lightbox from '../component/lightbox.jsx';
-import { Items, appContext } from '../misc';
-import content from '../content.json';
+import Header from '../components/header.jsx';
+import Searcher from '../components/searcher.jsx';
+import Lightbox from '../components/lightbox.jsx';
 
 const dbg = appContext.mkDbgLog('app');
 
-const Header = () => {
-  return (
-    <div className='page-header'>
-      <h1>Ingress bookmarks</h1>
-      <p className='text-success'>My Ingress bookmarks</p>
-    </div>
-  );
-};
-
-const SearchBar = () => {
-  return (
-    <div>
-      <div className='input-group input-group-sm'>
-        <div className='input-group-text'>
-          <i className='fa fa-search' />
-        </div>
-        <input
-          type='text'
-          className='form-control'
-          placeholder='Search ... (To Be Implemented)'
-        />
-      </div>
-    </div>
-  );
-};
-
-class App extends React.Component {
-  constructor(props) {
+class App extends Component {
+  constructor(props){
     super(props);
-
-    dbg('content %j', content);
-    this.srcItems = new Items();
-    this.srcItems.loadFromJson(content);
   }
-
+ 
   render() {
+    const { content } = this.props;
+    dbg('data: %j', content);
+    /* TODO handle error */
+
     return (
       <div>
+        <Header />
         <section className='container'>
-          <Header />
-        </section>
-
-        <hr />
-        <section className='container'>
-          <SearchBar />
+          <Searcher />
           <br />
-          <Lightbox
-            context={this.props.context}
-            srcItems={this.srcItems.items()}
-          />
+          <Lightbox srcItems={content.data} />
         </section>
       </div>
     );
@@ -65,19 +34,11 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  value: PropTypes.number.isRequired,
-  onIncClick: PropTypes.func.isRequired,
-  onDecClick: PropTypes.func.isRequired
+  content: PropTypes.object.isRequired
 };
 
-export default connect(
-  (state) => {
-    return { value: state.count }; 
-  },
-  (dispatch) => {
-    return {
-      onIncClick: () => dispatch({ type: 'INCREMENT' }),
-      onDecClick: () => dispatch({ type: 'DECREMENT' })
-    };
-  }
-)(App);
+const mapStateToProps = (state, ownProps) => {
+  return state;
+};
+
+export default withRouter(connect(mapStateToProps)(App));

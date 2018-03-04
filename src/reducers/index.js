@@ -1,13 +1,29 @@
+import { combineReducers } from 'redux';
+import { types as actTypes } from '../actions';
 
-export default (state = { count: 0 }, action) => {
-  const { count } = state;
+const initState = {
+  isLoading: true,
+  data: [],
+  error: false
+};
 
+const content = (state = initState, action) => {
   switch (action.type) {
-  case 'INCREMENT':
-    return { count: count + 1 };
-  case 'DECREMENT':
-    return { count: count - 1 };
+  case actTypes.RCV_CONTENT:
+    return {
+      ...state,
+      isLoading: false,
+      data: action.data
+    };
+  case actTypes.RCV_CONTENT_ERR:
+    return { 
+      ...state,
+      isLoading: false,
+      error: true
+    };
   default:
     return state;
   }
 };
+
+export default combineReducers({ content });

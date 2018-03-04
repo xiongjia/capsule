@@ -1,19 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-
-import reducers from './reducers';
-import App from './container/app.jsx';
+import { render } from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Root from './containers/root.jsx';
+import { configureStore } from './store';
 
 import 'bootstrap';
 import './main.scss';
 
-const store = createStore(reducers);
+const store = configureStore();
 
-ReactDOM.render(
-  <Provider store={store}>  
-    <App />
-  </Provider>,
+render(
+  <Router>
+    <Root store={store} />
+  </Router>,
   document.getElementById('root')
 );

@@ -1,6 +1,5 @@
 import React from 'react';
 import { appContext } from '../misc';
-
 const dbg = appContext.mkDbgLog('ltbx');
 
 const KEYCODE_ESC      = 27;
@@ -13,7 +12,8 @@ const KEYCODE_PG_DOWN  = 34;
 
 export default class Lightbox extends React.Component {
   constructor(props) {
-    super(props);
+    super(props);    
+
     this.handleImgClick = this.handleImgClick.bind(this);
     this.handleModalCloseClick = this.handleModalCloseClick.bind(this);
     this.handleKeydown = this.handleKeydown.bind(this);
@@ -100,6 +100,7 @@ export default class Lightbox extends React.Component {
 
   render() {
     const { srcItems } = this.props;
+    dbg('srcItems: %j', srcItems);
 
     return (
       <div className='row capLightbox'>

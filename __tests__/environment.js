@@ -1,10 +1,9 @@
-
-import chalk from 'chalk';
-import NodeEnvironment from 'jest-environment-node';
-import puppeteer from 'puppeteer';
-import fs from 'fs';
-import os from 'os';
-import path from 'path';
+const chalk = require('chalk');
+const NodeEnvironment = require('jest-environment-node');
+const puppeteer = require('puppeteer');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
 
 const DIR = path.join(os.tmpdir(), 'jest_puppeteer_global_setup');
 
